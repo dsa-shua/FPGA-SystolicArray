@@ -12,6 +12,8 @@ module top();
     reg             CLK = 1;
     logic           ENABLE = 1;
 
+
+    // TODO: Finish the proper sequence and check correctness
     reg     [31:0]  A0_seq [0:7] = {1, 2, 3, 0, 0, 0, 0, 0};
     reg     [31:0]  A3_seq [0:7] = {0, 4, 5, 6, 0, 0, 0, 0};
     reg     [31:0]  A6_seq [0:7] = {0, 0, 7, 8, 9, 0, 0, 0};
