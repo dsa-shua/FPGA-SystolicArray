@@ -7,6 +7,7 @@ default:
 
 clean:
 	rm -rf $(DIR)
+	rm -rf ./c_code/main
 
 pe:
 	verilator --timing --binary --trace PE.sv
@@ -14,4 +15,8 @@ pe:
 systolic:
 	verilator --timing --binary --trace systolic3x3.sv
 
-.PHONY: default clean pe systolic
+sim:
+	g++ -o ./c_code/main ./c_code/main.cpp
+	./c_code/main
+
+.PHONY: default clean pe systolic sim
