@@ -8,9 +8,9 @@ module PE(C, A, B, A_out, B_out, CLK, EN);
 
     always@(posedge CLK) begin
         if (EN) begin
+            ACC <= ACC + (A * B);
             A_data <= A;
             B_data <= B;
-            ACC <= ACC + (A * B);
         end
     end 
 
