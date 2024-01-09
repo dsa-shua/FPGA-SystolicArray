@@ -1,9 +1,10 @@
-EXEC = top.sv PE.sv systolic3x3.sv
+EXEC = top.sv PE.sv systolic3x3.sv fifo.sv
 DIR = obj_dir
-FLAGS = --timing --binar --trace
+FLAGS = --timing --binary --trace
 
 default:
 	verilator --timing --binary --trace $(EXEC)
+	./obj_dir/Vtop | tee systolic-log.txt
 
 clean:
 	rm -rf $(DIR)
@@ -18,5 +19,9 @@ systolic:
 sim:
 	g++ -o ./c_code/main ./c_code/main.cpp
 	./c_code/main
+
+fifo:
+	verilator $(FLAGS) FIFO_tb.sv fifo.sv
+	# ./obj_dir/VFIFO_tb
 
 .PHONY: default clean pe systolic sim
