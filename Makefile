@@ -18,10 +18,17 @@ systolic:
 
 sim:
 	g++ -o ./c_code/main ./c_code/main.cpp
-	./c_code/main
+	./c_code/main | tee sim.txt
 
 fifo:
 	verilator $(FLAGS) FIFO_tb.sv fifo.sv
 	# ./obj_dir/VFIFO_tb
 
-.PHONY: default clean pe systolic sim
+mux:
+	verilator $(FLAGS) MUX8_tb.sv MUX8.sv
+
+controller:
+	verilator $(FLAGS) controller_tb.sv controller.sv
+
+
+.PHONY: default clean pe systolic sim mux fifo

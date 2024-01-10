@@ -1,3 +1,6 @@
 obj_dir
 c_code/main
 systolic-log.txt
+sim.txt
+
+controller.sv
