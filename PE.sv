@@ -6,6 +6,12 @@ module PE(C, A, B, A_out, B_out, CLK, EN);
 
     reg [31:0]  A_data, B_data, ACC;
 
+    initial begin
+        A_data = 0;
+        B_data = 0;
+        ACC = 0;
+    end
+
     always@(posedge CLK) begin
         if (EN) begin
             ACC <= ACC + (A * B);
