@@ -1,3 +1,14 @@
+/*
+
+Documentation
+
+This top module assembles the systolic array in a 3x3 setting.
+This does not use the FIFO but rather uses hard coded array to set the edges.
+
+*/
+
+
+
 module top();
 
     wire    [31:0]  C0, C1, C2, C3, C4, C5, C6, C7, C8;
@@ -31,7 +42,7 @@ module top();
     reg     [31:0]  i;
 
     parameter MAX_ITER = 8;
-
+    reg     [31:0]  CYCLE = 0; // counter for cycles
 
     initial begin
         $display("Hello systolic array!");

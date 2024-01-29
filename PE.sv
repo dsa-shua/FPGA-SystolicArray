@@ -14,7 +14,7 @@ module PE(C, A, B, A_out, B_out, CLK, EN);
 
     always@(posedge CLK) begin
         if (EN) begin
-            ACC <= ACC + (A * B);
+            ACC <= ACC + (A_data * B_data); // "safer" and "synthesizable code"
             A_data <= A;
             B_data <= B;
         end

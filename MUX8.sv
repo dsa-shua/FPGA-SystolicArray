@@ -7,6 +7,7 @@ module MUX8(DATA_OUT, S0,S1,S2,S3,S4,S5,S6,S7,SELECT,ENABLE);
 
     reg [31:0] D_REG = 0;
 
+    // Check: Replace with always@*
     /* verilator lint_off LATCH */  always_comb begin 
         if (ENABLE) begin
             case (SELECT) 

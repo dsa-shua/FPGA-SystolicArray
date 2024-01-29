@@ -1,6 +1,10 @@
+.gitignore
 obj_dir
 c_code/main
+c_code/test
 systolic-log.txt
 sim.txt
 
 controller.sv
+DMUX8.sv
+DMUX8_tb.sv
