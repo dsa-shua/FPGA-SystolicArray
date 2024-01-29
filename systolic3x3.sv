@@ -6,8 +6,8 @@ module systolic3x3(
     input           EN
     );
 
-    wire    [31:0]  A1, A2, A4, A5, A7, A8, B3, B4, B5, B6, B7, B8;
-    wire    [31:0]  R0, R1, R2, D0, D1, D2; 
+    wire    [31:0]  A1, A2, A4, A5, A7, A8, B3, B4, B5, B6, B7, B8; // in between wires
+    wire    [31:0]  R0, R1, R2, D0, D1, D2; // end edges
     
 
     PE CELL0(.C(C0), .A(A0), .B(B0), .A_out(A1), .B_out(B3), .CLK(CLK), .EN(EN));
