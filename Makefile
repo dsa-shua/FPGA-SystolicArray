@@ -39,7 +39,7 @@ tile_sim:
 	./c_code/tile | tee sim.txt
 
 tile:
-	verilator $(FLAGS) src/tile_tb.sv src/SYSTOLIC.sv
+	verilator $(FLAGS) src/tile_tb.sv src/tile.sv src/hPE.sv
 	
 
 .PHONY: default clean pe systolic sim mux fifo test tile_sim tile
