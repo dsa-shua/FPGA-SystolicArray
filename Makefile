@@ -22,7 +22,6 @@ sim:
 
 fifo:
 	verilator $(FLAGS) FIFO_tb.sv fifo.sv
-	# ./obj_dir/VFIFO_tb
 
 mux:
 	verilator $(FLAGS) MUX8_tb.sv MUX8.sv
@@ -40,6 +39,9 @@ tile_sim:
 
 tile:
 	verilator $(FLAGS) src/tile_tb.sv src/tile.sv src/hPE.sv
+
+hfifo:
+	verilator $(FLAGS) src/hFIFO_tb.sv src/hFIFO.sv
 	
 
-.PHONY: default clean pe systolic sim mux fifo test tile_sim tile
+.PHONY: default clean pe systolic sim mux fifo test tile_sim tile hfifo
