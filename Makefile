@@ -38,7 +38,7 @@ tile_sim:
 	./c_code/tile | tee sim.txt
 
 tile:
-	verilator $(FLAGS) src/tile_tb.sv src/tile.sv src/hPE.sv
+	verilator $(FLAGS) src/tile_tb.sv src/tile.sv src/hPE.sv src/hFIFO.sv
 
 hfifo:
 	verilator $(FLAGS) src/hFIFO_tb.sv src/hFIFO.sv

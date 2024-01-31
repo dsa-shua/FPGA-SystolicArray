@@ -9,28 +9,7 @@ module tile_tb();
     reg CLK = 0;
     reg EN = 1;
 
-
-    // Edge Registers
-    reg [15:0]  xR0X = 0;
-    reg [15:0]  xR1X = 0;
-    reg [15:0]  xR2X = 0;
-    reg [15:0]  xR3X = 0;
-    reg [15:0]  xR4X = 0;
-    reg [15:0]  xR5X = 0;
-    reg [15:0]  xR6X = 0;
-    reg [15:0]  xR7X = 0;
-
-    reg [15:0]  xC0X = 0;
-    reg [15:0]  xC1X = 0;
-    reg [15:0]  xC2X = 0;
-    reg [15:0]  xC3X = 0;
-    reg [15:0]  xC4X = 0;
-    reg [15:0]  xC5X = 0;
-    reg [15:0]  xC6X = 0;
-    reg [15:0]  xC7X = 0;
-
     
-
     // Edge Registers Seq
     reg [15:0]  sR0X [0:22] = {1,2,3,4,5,6,7,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     reg [15:0]  sR1X [0:22] = {0,1,2,3,4,5,6,7,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
@@ -72,67 +51,109 @@ module tile_tb();
     localparam  MAX_ITER = SEQ_LEN + 2;
     
 
+
+    ///////////////////////////////////////////////////////////////////////////////////////////
+
+    // FIFOS
+    reg     [15:0]  R_DIN       [0:7];
+    reg     [15:0]  C_DIN       [0:7];
+    reg             FIFO_WRITE          = 0;
+    reg             FIFO_EN             = 0;             
+
+
+    wire    [15:0]  R_DOUT      [0:7];
+    wire    [15:0]  C_DOUT      [0:7];
+    wire    [3:0]   FIFO_STATUS [0:15];
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////
+
     initial begin
         $display("Hello 8x8 systolic array!");
         $dumpfile("waveform.vcd");
         $dumpvars(0, tile_tb);
 
-        xR0X = 0;
-        xR1X = 0;
-        xR2X = 0;
-        xR3X = 0;
-        xR4X = 0;
-        xR5X = 0;
-        xR6X = 0;
-        xR7X = 0;
+        // Temporarily Disable the Systolic Array & Enable the FIFOs
+        EN = 0;
+        FIFO_EN = 1;
+        FIFO_WRITE = 1;
 
-        xC0X = 0;
-        xC1X = 0;
-        xC2X = 0;
-        xC3X = 0;
-        xC4X = 0;
-        xC5X = 0;
-        xC6X = 0;
-        xC7X = 0;
+        $display("Filling FIFOs...");
+        
 
-        for(idx = 0; idx < MAX_ITER; idx = idx + 1) begin
-            xR0X = sR0X[idx];
-            xR1X = sR1X[idx];
-            xR2X = sR2X[idx];
-            xR3X = sR3X[idx];
-            xR4X = sR4X[idx];
-            xR5X = sR5X[idx];
-            xR6X = sR6X[idx];
-            xR7X = sR7X[idx];
+        // Initialize R_DIN Registers
+        for(integer i = 0; i < 8; i = i + 1) begin
+            R_DIN[i] = 0;
+        end
 
-            xC0X = sC0X[idx];
-            xC1X = sC1X[idx];
-            xC2X = sC2X[idx];
-            xC3X = sC3X[idx];
-            xC4X = sC4X[idx];
-            xC5X = sC5X[idx];
-            xC6X = sC6X[idx];
-            xC7X = sC7X[idx];
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // FILL FIFO
+        for(integer i = 0; i < 24; i = i + 1) begin
+            R_DIN[0] = sR0X[i];
+            R_DIN[1] = sR1X[i];
+            R_DIN[2] = sR2X[i];
+            R_DIN[3] = sR3X[i];
+            R_DIN[4] = sR4X[i];
+            R_DIN[5] = sR5X[i];
+            R_DIN[6] = sR6X[i];
+            R_DIN[7] = sR7X[i];
+
+
+            C_DIN[0] = sC0X[i];
+            C_DIN[1] = sC1X[i];
+            C_DIN[2] = sC2X[i];
+            C_DIN[3] = sC3X[i];
+            C_DIN[4] = sC4X[i];
+            C_DIN[5] = sC5X[i];
+            C_DIN[6] = sC6X[i];
+            C_DIN[7] = sC7X[i];
+            
 
 
             #10 CLK = ~CLK;
-            $display("============================================================================");
-            $display("Iteration: %d", idx);
-
             #10 CLK = ~CLK;
         end
+
+        // Enable SYSTOLIC ARRAY
+        EN = 1;
+        FIFO_EN = 1;
+        FIFO_WRITE = 0;
+        CLK = 0;
+
+        $display("Done with FIFOs!");
+
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // DO MATRIX MULTIPLICATION
+        $display("Performing Matrix Multiplication...");
+        for(idx = 0; idx < MAX_ITER; idx = idx + 1) begin
+            #10 CLK = ~CLK;
+            $display("Iteration: %d", idx);
+            #10 CLK = ~CLK;
+        end
+        
+        $display("Done with MATMUL!");
+
         #10;
         $display("Bye!");
         $finish;
     end
 
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////
+
+    // ARCHITECTURE
     
 
     tile systolicArray(
         .CLK(CLK), .EN(EN),
         
-        .N_R0X(xR0X), .N_R1X(xR1X), .N_R2X(xR2X), .N_R3X(xR3X), .N_R4X(xR4X), .N_R5X(xR5X), .N_R6X(xR6X), .N_R7X(xR7X), 
-        .N_C0X(xC0X), .N_C1X(xC1X), .N_C2X(xC2X), .N_C3X(xC3X), .N_C4X(xC4X), .N_C5X(xC5X), .N_C6X(xC6X), .N_C7X(xC7X),
+        .N_R0X(R_DOUT[0]), .N_R1X(R_DOUT[1]), .N_R2X(R_DOUT[2]), .N_R3X(R_DOUT[3]), .N_R4X(R_DOUT[4]), .N_R5X(R_DOUT[5]), .N_R6X(R_DOUT[6]), .N_R7X(R_DOUT[7]), 
+        .N_C0X(C_DOUT[0]), .N_C1X(C_DOUT[1]), .N_C2X(C_DOUT[2]), .N_C3X(C_DOUT[3]), .N_C4X(C_DOUT[4]), .N_C5X(C_DOUT[5]), .N_C6X(C_DOUT[6]), .N_C7X(C_DOUT[7]),
         
         .Y_00(Y_00), .Y_10(Y_10), .Y_20(Y_20), .Y_30(Y_30), .Y_40(Y_40), .Y_50(Y_50), .Y_60(Y_60), .Y_70(Y_70),
         .Y_01(Y_01), .Y_11(Y_11), .Y_21(Y_21), .Y_31(Y_31), .Y_41(Y_41), .Y_51(Y_51), .Y_61(Y_61), .Y_71(Y_71),
@@ -147,6 +168,62 @@ module tile_tb();
         .N_R0Y(N_R0Y), .N_R1Y(N_R1Y), .N_R2Y(N_R2Y), .N_R3Y(N_R3Y), .N_R4Y(N_R4Y), .N_R5Y(N_R5Y), .N_R6Y(N_R6Y), .N_R7Y(N_R7Y)
     );
 
+
+    
+
+
+    // EDGE FIFOs
+    hFIFO R_FIFO_0(.DATA_IN(R_DIN[0]), .DATA_OUT(R_DOUT[0]), .CLK(CLK), .WRITE(FIFO_WRITE), .ENABLE(FIFO_EN), 
+                .ALMOST_FULL(FIFO_STATUS[0][3]), .ALMOST_EMPTY(FIFO_STATUS[0][2]), .FULL(FIFO_STATUS[0][1]), .EMPTY(FIFO_STATUS[0][0]));
+
+    hFIFO R_FIFO_1(.DATA_IN(R_DIN[1]), .DATA_OUT(R_DOUT[1]), .CLK(CLK), .WRITE(FIFO_WRITE), .ENABLE(FIFO_EN), 
+                .ALMOST_FULL(FIFO_STATUS[1][3]), .ALMOST_EMPTY(FIFO_STATUS[1][2]), .FULL(FIFO_STATUS[1][1]), .EMPTY(FIFO_STATUS[1][0]));
+    
+    hFIFO R_FIFO_2(.DATA_IN(R_DIN[2]), .DATA_OUT(R_DOUT[2]), .CLK(CLK), .WRITE(FIFO_WRITE), .ENABLE(FIFO_EN), 
+                .ALMOST_FULL(FIFO_STATUS[2][3]), .ALMOST_EMPTY(FIFO_STATUS[2][2]), .FULL(FIFO_STATUS[2][1]), .EMPTY(FIFO_STATUS[2][0]));
+    
+    hFIFO R_FIFO_3(.DATA_IN(R_DIN[3]), .DATA_OUT(R_DOUT[3]), .CLK(CLK), .WRITE(FIFO_WRITE), .ENABLE(FIFO_EN), 
+                .ALMOST_FULL(FIFO_STATUS[3][3]), .ALMOST_EMPTY(FIFO_STATUS[3][2]), .FULL(FIFO_STATUS[3][1]), .EMPTY(FIFO_STATUS[3][0]));
+
+    hFIFO R_FIFO_4(.DATA_IN(R_DIN[4]), .DATA_OUT(R_DOUT[4]), .CLK(CLK), .WRITE(FIFO_WRITE), .ENABLE(FIFO_EN), 
+                .ALMOST_FULL(FIFO_STATUS[4][3]), .ALMOST_EMPTY(FIFO_STATUS[4][2]), .FULL(FIFO_STATUS[4][1]), .EMPTY(FIFO_STATUS[4][0]));
+    
+    hFIFO R_FIFO_5(.DATA_IN(R_DIN[5]), .DATA_OUT(R_DOUT[5]), .CLK(CLK), .WRITE(FIFO_WRITE), .ENABLE(FIFO_EN), 
+                .ALMOST_FULL(FIFO_STATUS[5][3]), .ALMOST_EMPTY(FIFO_STATUS[5][2]), .FULL(FIFO_STATUS[5][1]), .EMPTY(FIFO_STATUS[5][0]));
+    
+    hFIFO R_FIFO_6(.DATA_IN(R_DIN[6]), .DATA_OUT(R_DOUT[6]), .CLK(CLK), .WRITE(FIFO_WRITE), .ENABLE(FIFO_EN), 
+                .ALMOST_FULL(FIFO_STATUS[6][3]), .ALMOST_EMPTY(FIFO_STATUS[6][2]), .FULL(FIFO_STATUS[6][1]), .EMPTY(FIFO_STATUS[6][0]));
+    
+    hFIFO R_FIFO_7(.DATA_IN(R_DIN[7]), .DATA_OUT(R_DOUT[7]), .CLK(CLK), .WRITE(FIFO_WRITE), .ENABLE(FIFO_EN), 
+                .ALMOST_FULL(FIFO_STATUS[7][3]), .ALMOST_EMPTY(FIFO_STATUS[7][2]), .FULL(FIFO_STATUS[7][1]), .EMPTY(FIFO_STATUS[7][0]));
+
+
+
+    hFIFO C_FIFO_0(.DATA_IN(C_DIN[0]), .DATA_OUT(C_DOUT[0]), .CLK(CLK), .WRITE(FIFO_WRITE), .ENABLE(FIFO_EN), 
+                .ALMOST_FULL(FIFO_STATUS[8][3]), .ALMOST_EMPTY(FIFO_STATUS[8][2]), .FULL(FIFO_STATUS[8][1]), .EMPTY(FIFO_STATUS[8][0]));
+
+    hFIFO C_FIFO_1(.DATA_IN(C_DIN[1]), .DATA_OUT(C_DOUT[1]), .CLK(CLK), .WRITE(FIFO_WRITE), .ENABLE(FIFO_EN), 
+                .ALMOST_FULL(FIFO_STATUS[9][3]), .ALMOST_EMPTY(FIFO_STATUS[9][2]), .FULL(FIFO_STATUS[9][1]), .EMPTY(FIFO_STATUS[9][0]));
+    
+    hFIFO C_FIFO_2(.DATA_IN(C_DIN[2]), .DATA_OUT(C_DOUT[2]), .CLK(CLK), .WRITE(FIFO_WRITE), .ENABLE(FIFO_EN), 
+                .ALMOST_FULL(FIFO_STATUS[10][3]), .ALMOST_EMPTY(FIFO_STATUS[10][2]), .FULL(FIFO_STATUS[10][1]), .EMPTY(FIFO_STATUS[10][0]));
+    
+    hFIFO C_FIFO_3(.DATA_IN(C_DIN[3]), .DATA_OUT(C_DOUT[3]), .CLK(CLK), .WRITE(FIFO_WRITE), .ENABLE(FIFO_EN), 
+                .ALMOST_FULL(FIFO_STATUS[11][3]), .ALMOST_EMPTY(FIFO_STATUS[11][2]), .FULL(FIFO_STATUS[11][1]), .EMPTY(FIFO_STATUS[11][0]));
+
+    hFIFO C_FIFO_4(.DATA_IN(C_DIN[4]), .DATA_OUT(C_DOUT[4]), .CLK(CLK), .WRITE(FIFO_WRITE), .ENABLE(FIFO_EN), 
+                .ALMOST_FULL(FIFO_STATUS[12][3]), .ALMOST_EMPTY(FIFO_STATUS[12][2]), .FULL(FIFO_STATUS[12][1]), .EMPTY(FIFO_STATUS[12][0]));
+    
+    hFIFO C_FIFO_5(.DATA_IN(C_DIN[5]), .DATA_OUT(C_DOUT[5]), .CLK(CLK), .WRITE(FIFO_WRITE), .ENABLE(FIFO_EN), 
+                .ALMOST_FULL(FIFO_STATUS[13][3]), .ALMOST_EMPTY(FIFO_STATUS[13][2]), .FULL(FIFO_STATUS[13][1]), .EMPTY(FIFO_STATUS[13][0]));
+    
+    hFIFO C_FIFO_6(.DATA_IN(C_DIN[6]), .DATA_OUT(C_DOUT[6]), .CLK(CLK), .WRITE(FIFO_WRITE), .ENABLE(FIFO_EN), 
+                .ALMOST_FULL(FIFO_STATUS[14][3]), .ALMOST_EMPTY(FIFO_STATUS[14][2]), .FULL(FIFO_STATUS[14][1]), .EMPTY(FIFO_STATUS[14][0]));
+    
+    hFIFO C_FIFO_7(.DATA_IN(C_DIN[7]), .DATA_OUT(C_DOUT[7]), .CLK(CLK), .WRITE(FIFO_WRITE), .ENABLE(FIFO_EN), 
+                .ALMOST_FULL(FIFO_STATUS[15][3]), .ALMOST_EMPTY(FIFO_STATUS[15][2]), .FULL(FIFO_STATUS[15][1]), .EMPTY(FIFO_STATUS[15][0]));
+
+    
 
 
 endmodule
