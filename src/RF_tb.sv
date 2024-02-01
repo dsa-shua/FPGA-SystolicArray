@@ -1,61 +1,80 @@
 module RF_tb();
 
     reg CLK = 0;
-    
+    reg RF_EN = 1;
+
+    reg WRITE = 0;
+
     reg [15:0]  DATA;
-    reg [31:0]  ADDR;
+    reg [4:0]   IDX;
+    reg [3:0]   REG_SELECT;
 
-    reg RF_WRITE = 0;
-
-    wire [15:0] R_OUT   [0:7];
-    wire [15:0] C_OUT   [0:7];
-    wire [3:0]  FIFO_STATUS [0:15];
-
+    wire [15:0] DOUT [0:15];
 
     initial begin
-        $display("Hello REGISTER FILE");
+        $display("Hello RF TB!");
         $dumpfile("waveform.vcd");
         $dumpvars(0, RF_tb);
+        
 
-        DATA = 0;
-        ADDR = 0;
-        RF_WRITE = 1;
+        $display("Writing to Registers...");
+        WRITE = 1;
 
-        for(integer i = 0; i < 64; i = i + 1) begin
-            DATA = i[15:0];
-            ADDR = i;
+        // For every register
+        for(integer i = 0; i < 16; i = i + 1) begin
+            $display("Current REG: %d", i);
+            REG_SELECT = i[3:0];
 
-            #10 CLK = ~CLK;
-            $display("Iteration: %d", i);
-            #10 CLK = ~CLK;
+            // for every element
+            for(integer j = 1; j < 9; j = j + 1) begin
+                
 
+                DATA = j[15:0];
+                
+                if(i < 8) begin
+                    IDX = j[4:0] + i[4:0];
+                end
+                else begin
+                    IDX = j[4:0] + i[4:0] - 8;
+                end
+
+                // $display("  Current IDX: %d | Resulting IDX: %d | DATA: %d", j, IDX, DATA);
+                
+
+                #10 CLK = ~CLK;
+                #10 CLK = ~CLK;
+            end
         end
 
-        RF_WRITE = 0;
+
+        ////// Important!  //////
+
+        // We need one more cycle since data is 
+        // currently on a buffer, not the REGISTER!
+
+        #10 CLK = ~CLK;
+        #10 CLK = ~CLK;
+
+        /////////////////////////
+
+        $display("Spitting contents...");
+        WRITE = 0;
+        for(integer i = 0; i < 25; i = i + 1) begin
+            #10 CLK = ~CLK;
+            #10 CLK = ~CLK;
+        end
+
+
 
         #10;
-        $display("Bye~");
+        $display("Bye!");
         $finish;
     end
+
+    RF registerFile(.CLK(CLK), .RF_EN(RF_EN), .WRITE(WRITE),
+        .IDX(IDX), .DIN(DATA), .REG_SELECT(REG_SELECT),
+        .X_OUT(DOUT[0:7]), .W_OUT(DOUT[8:15]));
     
-
-    
-
-
-    RF regFile(
-        .CLK(CLK),
-        .RF_ENABLE(1),
-        .FIFO_ENABLE(0),
-        .FIFO_WRITE(0),
-        .RF_WRITE(RF_WRITE),
-        .ADDR(ADDR),
-        .DATA(DATA),
-        .R_OUT(R_OUT),
-        .C_OUT(C_OUT),
-        .FIFO_STATUS(FIFO_STATUS)
-        
-    );
-
 
 
 endmodule

@@ -8,7 +8,7 @@ default:
 clean:
 	rm -rf $(DIR)
 	rm -rf ./c_code/main ./c_code/test ./c_code/tile
-	
+	clear
 
 pe:
 	verilator --timing --binary --trace PE.sv
@@ -44,7 +44,7 @@ hfifo:
 	verilator $(FLAGS) src/hFIFO_tb.sv src/hFIFO.sv
 
 rf:
-	verilator $(FLAGS) src/RF_tb.sv src/RF.sv
+	verilator $(FLAGS) src/RF_tb.sv src/RF.sv src/X_REG.sv
 
 x_reg:
 	verilator $(FLAGS) src/X_REG_tb.sv src/X_REG.sv
