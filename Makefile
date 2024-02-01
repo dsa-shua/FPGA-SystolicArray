@@ -46,4 +46,7 @@ hfifo:
 rf:
 	verilator $(FLAGS) src/RF_tb.sv src/RF.sv
 
-.PHONY: default clean pe systolic sim mux fifo test tile_sim tile hfifo RF
+x_reg:
+	verilator $(FLAGS) src/X_REG_tb.sv src/X_REG.sv
+
+.PHONY: default clean pe systolic sim mux fifo test tile_sim tile hfifo RF x_reg
