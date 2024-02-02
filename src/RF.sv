@@ -11,6 +11,7 @@ module RF(CLK, RF_EN, WRITE, IDX, DIN, REG_SELECT, X_OUT, W_OUT);
     input RF_EN;
     
     input WRITE;                        // Are we writing to the registers?
+                                        // When low, we should start MATMUL
     
     input [4:0] IDX;
     input [15:0] DIN;
