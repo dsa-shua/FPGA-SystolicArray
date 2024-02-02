@@ -58,3 +58,6 @@ run:
 
 memory:
 	verilator $(FLAGS) src/memory_tb.sv src/memory.sv
+
+top:
+	verilator $(FLAGS) src/top_module_tb.sv src/top_module.sv src/SystolicArray.sv src/tile.sv src/RF.sv src/hPE.sv src/X_REG.sv
