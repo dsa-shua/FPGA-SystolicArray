@@ -9,7 +9,25 @@ module SystolicArray_tb();
     reg WRITE = 0;
     
     reg [4:0]   IDX = 0;
-    reg [15:0]  DATA = 0;
+    
+    reg [15:0]  DATA_0 = 0;
+    reg [15:0]  DATA_1 = 0;
+    reg [15:0]  DATA_2 = 0;
+    reg [15:0]  DATA_3 = 0;
+    reg [15:0]  DATA_4 = 0;
+    reg [15:0]  DATA_5 = 0;
+    reg [15:0]  DATA_6 = 0;
+    reg [15:0]  DATA_7 = 0;
+    reg [15:0]  DATA_8 = 0;
+    reg [15:0]  DATA_9 = 0;
+    reg [15:0]  DATA_10 = 0;
+    reg [15:0]  DATA_11 = 0;
+    reg [15:0]  DATA_12 = 0;
+    reg [15:0]  DATA_13 = 0;
+    reg [15:0]  DATA_14 = 0;
+    reg [15:0]  DATA_15 = 0;
+
+    
     reg [3:0]   REG_SELECT;
 
 
@@ -25,29 +43,28 @@ module SystolicArray_tb();
         RF_EN = 1;
 
         // For every register
-        for(integer i = 0; i < 16; i = i + 1) begin
-            // $display("Current REG: %d", i);
-            REG_SELECT = i[3:0];
+        
+        for(integer i = 1; i < 9; i = i + 1) begin
+            IDX = i[4:0] - 1'b1;
+            DATA_0 = i[15:0];
+            DATA_1 = i[15:0];
+            DATA_2 = i[15:0];
+            DATA_3 = i[15:0];
+            DATA_4 = i[15:0];
+            DATA_5 = i[15:0];
+            DATA_6 = i[15:0];
+            DATA_7 = i[15:0];
+            DATA_8 = i[15:0];
+            DATA_9 = i[15:0];
+            DATA_10 = i[15:0];
+            DATA_11 = i[15:0];
+            DATA_12 = i[15:0];
+            DATA_13 = i[15:0];
+            DATA_14 = i[15:0];
+            DATA_15 = i[15:0];
 
-            // for every element
-            for(integer j = 1; j < 9; j = j + 1) begin
-                
-
-                DATA = j[15:0];
-                
-                if(i < 8) begin
-                    IDX = j[4:0] + i[4:0];
-                end
-                else begin
-                    IDX = j[4:0] + i[4:0] - 8;
-                end
-
-                // $display("  Current IDX: %d | Resulting IDX: %d | DATA: %d", j, IDX, DATA);
-                
-
-                #10 CLK = ~CLK;
-                #10 CLK = ~CLK;
-            end
+            #10 CLK = ~CLK;
+            #10 CLK = ~CLK;
         end
 
 
@@ -87,7 +104,28 @@ module SystolicArray_tb();
 
 
     SystolicArray sa_module(
-        .CLK(CLK), .EN(EN), .RF_EN(RF_EN), .WRITE(WRITE), .IDX(IDX), .DIN(DATA), .REG_SELECT(REG_SELECT)
+        .CLK(CLK), .EN(EN), .RF_EN(RF_EN), .WRITE(WRITE), .IDX(IDX), 
+        
+        
+        .DIN_0(DATA_0), 
+        .DIN_1(DATA_1), 
+        .DIN_2(DATA_2), 
+        .DIN_3(DATA_3), 
+        .DIN_4(DATA_4), 
+        .DIN_5(DATA_5), 
+        .DIN_6(DATA_6), 
+        .DIN_7(DATA_7), 
+        .DIN_8(DATA_8), 
+        .DIN_9(DATA_9), 
+        .DIN_10(DATA_10), 
+        .DIN_11(DATA_11), 
+        .DIN_12(DATA_12), 
+        .DIN_13(DATA_13), 
+        .DIN_14(DATA_14), 
+        .DIN_15(DATA_15), 
+        
+        
+        .REG_SELECT(REG_SELECT)
     );
 
 

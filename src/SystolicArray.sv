@@ -4,7 +4,27 @@
 
 
 module SystolicArray(
-    CLK, EN, RF_EN, WRITE, IDX, DIN, REG_SELECT
+    CLK, EN, RF_EN, WRITE, IDX, 
+    
+    DIN_0,
+    DIN_1,
+    DIN_2,
+    DIN_3,
+    DIN_4,
+    DIN_5,
+    DIN_6,
+    DIN_7,
+    DIN_8,
+    DIN_9,
+    DIN_10,
+    DIN_11,
+    DIN_12,
+    DIN_13,
+    DIN_14,
+    DIN_15, 
+    
+    
+    REG_SELECT
 );
 
     input CLK;
@@ -15,8 +35,27 @@ module SystolicArray(
     
     input WRITE;                    // WHEN LOAD IS LOW: When H, fill register file
     
-    input [4:0]     IDX;                
-    input [15:0]    DIN;
+    input [4:0]     IDX;             
+
+    input [15:0]    DIN_0;
+    input [15:0]    DIN_1;
+    input [15:0]    DIN_2;
+    input [15:0]    DIN_3;
+    input [15:0]    DIN_4;
+    input [15:0]    DIN_5;
+    input [15:0]    DIN_6;
+    input [15:0]    DIN_7;
+    input [15:0]    DIN_8;
+    input [15:0]    DIN_9;
+    input [15:0]    DIN_10;
+    input [15:0]    DIN_11;
+    input [15:0]    DIN_12;
+    input [15:0]    DIN_13;
+    input [15:0]    DIN_14;
+    input [15:0]    DIN_15;
+
+
+
     input [3:0]     REG_SELECT;
 
     
@@ -24,9 +63,15 @@ module SystolicArray(
 
     // FOR REGISTER FILE // 
 
-    reg [15:0] DATA_BUFFER = 0;
+    reg [15:0] DATA_BUFFER [0:15];
     reg [4:0]   IDX_BUFFER = 0;
     reg [3:0]   REG_SELECT_BUFFER = 0;
+
+    initial begin
+        for(integer i = 0; i < 16; i = i + 1) begin
+            DATA_BUFFER[i[3:0]] = 16'b0;
+        end
+    end
 
     always@(posedge CLK) begin
 
@@ -36,9 +81,30 @@ module SystolicArray(
             // If we are currently writing...
             if(WRITE) begin
                 // Write to register file!
-                DATA_BUFFER <= DIN;
+                // DATA_BUFFER <= DIN;
+
+                DATA_BUFFER[0] <= DIN_0;
+                DATA_BUFFER[1] <= DIN_1;
+                DATA_BUFFER[2] <= DIN_2;
+                DATA_BUFFER[3] <= DIN_3;
+                DATA_BUFFER[4] <= DIN_4;
+                DATA_BUFFER[5] <= DIN_5;
+                DATA_BUFFER[6] <= DIN_6;
+                DATA_BUFFER[7] <= DIN_7;
+                DATA_BUFFER[8] <= DIN_8;
+                DATA_BUFFER[9] <= DIN_9;
+                DATA_BUFFER[10] <= DIN_10;
+                DATA_BUFFER[11] <= DIN_11;
+                DATA_BUFFER[12] <= DIN_12;
+                DATA_BUFFER[13] <= DIN_13;
+                DATA_BUFFER[14] <= DIN_14;
+                DATA_BUFFER[15] <= DIN_15;
+
+
+
+
                 IDX_BUFFER <= IDX;
-                REG_SELECT_BUFFER <= REG_SELECT;
+                // REG_SELECT_BUFFER <= REG_SELECT;
             end
 
         end
@@ -122,8 +188,23 @@ module SystolicArray(
         .WRITE(WRITE),
 
         .IDX(IDX_BUFFER),
-        .DIN(DATA_BUFFER),
-        .REG_SELECT(REG_SELECT_BUFFER),
+        
+        .DATA_IN_0(DATA_BUFFER[0]),
+        .DATA_IN_1(DATA_BUFFER[1]),
+        .DATA_IN_2(DATA_BUFFER[2]),
+        .DATA_IN_3(DATA_BUFFER[3]),
+        .DATA_IN_4(DATA_BUFFER[4]),
+        .DATA_IN_5(DATA_BUFFER[5]),
+        .DATA_IN_6(DATA_BUFFER[6]),
+        .DATA_IN_7(DATA_BUFFER[7]),
+        .DATA_IN_8(DATA_BUFFER[8]),
+        .DATA_IN_9(DATA_BUFFER[9]),
+        .DATA_IN_A(DATA_BUFFER[10]),
+        .DATA_IN_B(DATA_BUFFER[11]),
+        .DATA_IN_C(DATA_BUFFER[12]),
+        .DATA_IN_D(DATA_BUFFER[13]),
+        .DATA_IN_E(DATA_BUFFER[14]),
+        .DATA_IN_F(DATA_BUFFER[15]),
 
         .X_OUT(X_OUT),
         .W_OUT(W_OUT)
