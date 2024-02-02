@@ -13,7 +13,6 @@ module SystolicArray(
 
     input RF_EN;
     
-    // input LOAD;                     // Load internal memory
     input WRITE;                    // WHEN LOAD IS LOW: When H, fill register file
     
     input [4:0]     IDX;                
