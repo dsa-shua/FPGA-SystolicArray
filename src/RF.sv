@@ -33,7 +33,7 @@ module RF(CLK, RF_EN, WRITE, IDX,
     input WRITE;                        // Are we writing to the registers?
                                         // When low, we should start MATMUL
     
-    input [4:0] IDX;
+    input [2:0] IDX;
 
     // input [15:0] DATA_IN [0:15];
 
@@ -69,55 +69,55 @@ module RF(CLK, RF_EN, WRITE, IDX,
 
     // Input Matrix
     X_REG X_REG_0(.CLK(CLK), .EN(RF_EN), .WRITE(WRITE),
-        .IDX(IDX), .DIN(DATA_IN_0), .DOUT(X_OUT[0]));
+        .IDX({2'b0,IDX}), .DIN(DATA_IN_0), .DOUT(X_OUT[0]));
 
     X_REG X_REG_1(.CLK(CLK), .EN(RF_EN), .WRITE(WRITE),
-        .IDX(IDX+1), .DIN(DATA_IN_1), .DOUT(X_OUT[1]));
+        .IDX({2'b0,IDX}+1), .DIN(DATA_IN_1), .DOUT(X_OUT[1]));
 
     X_REG X_REG_2(.CLK(CLK), .EN(RF_EN), .WRITE(WRITE),
-        .IDX(IDX+2), .DIN(DATA_IN_2), .DOUT(X_OUT[2]));
+        .IDX({2'b0,IDX}+2), .DIN(DATA_IN_2), .DOUT(X_OUT[2]));
 
     X_REG X_REG_3(.CLK(CLK), .EN(RF_EN), .WRITE(WRITE),
-        .IDX(IDX+3), .DIN(DATA_IN_3), .DOUT(X_OUT[3]));
+        .IDX({2'b0,IDX}+3), .DIN(DATA_IN_3), .DOUT(X_OUT[3]));
 
     X_REG X_REG_4(.CLK(CLK), .EN(RF_EN), .WRITE(WRITE),
-        .IDX(IDX+4), .DIN(DATA_IN_4), .DOUT(X_OUT[4]));
+        .IDX({2'b0,IDX}+4), .DIN(DATA_IN_4), .DOUT(X_OUT[4]));
 
     X_REG X_REG_5(.CLK(CLK), .EN(RF_EN), .WRITE(WRITE),
-        .IDX(IDX+5), .DIN(DATA_IN_5), .DOUT(X_OUT[5]));
+        .IDX({2'b0,IDX}+5), .DIN(DATA_IN_5), .DOUT(X_OUT[5]));
 
     X_REG X_REG_6(.CLK(CLK), .EN(RF_EN), .WRITE(WRITE),
-        .IDX(IDX+6), .DIN(DATA_IN_6), .DOUT(X_OUT[6]));
+        .IDX({2'b0,IDX}+6), .DIN(DATA_IN_6), .DOUT(X_OUT[6]));
 
     X_REG X_REG_7(.CLK(CLK), .EN(RF_EN), .WRITE(WRITE),
-        .IDX(IDX+7), .DIN(DATA_IN_7), .DOUT(X_OUT[7]));
+        .IDX({2'b0,IDX}+7), .DIN(DATA_IN_7), .DOUT(X_OUT[7]));
 
     
 
     // Weights Matrix    
     X_REG X_REG_8(.CLK(CLK), .EN(RF_EN), .WRITE(WRITE),
-        .IDX(IDX), .DIN(DATA_IN_8), .DOUT(W_OUT[0]));
+        .IDX({2'b0,IDX}), .DIN(DATA_IN_8), .DOUT(W_OUT[0]));
 
     X_REG X_REG_9(.CLK(CLK), .EN(RF_EN), .WRITE(WRITE),
-        .IDX(IDX+1), .DIN(DATA_IN_9), .DOUT(W_OUT[1]));
+        .IDX({2'b0,IDX}+1), .DIN(DATA_IN_9), .DOUT(W_OUT[1]));
 
     X_REG X_REG_A(.CLK(CLK), .EN(RF_EN), .WRITE(WRITE),
-        .IDX(IDX+2), .DIN(DATA_IN_A), .DOUT(W_OUT[2]));
+        .IDX({2'b0,IDX}+2), .DIN(DATA_IN_A), .DOUT(W_OUT[2]));
 
     X_REG X_REG_B(.CLK(CLK), .EN(RF_EN), .WRITE(WRITE),
-        .IDX(IDX+3), .DIN(DATA_IN_B), .DOUT(W_OUT[3]));
+        .IDX({2'b0,IDX}+3), .DIN(DATA_IN_B), .DOUT(W_OUT[3]));
 
     X_REG X_REG_C(.CLK(CLK), .EN(RF_EN), .WRITE(WRITE),
-        .IDX(IDX+4), .DIN(DATA_IN_C), .DOUT(W_OUT[4]));
+        .IDX({2'b0,IDX}+4), .DIN(DATA_IN_C), .DOUT(W_OUT[4]));
 
     X_REG X_REG_D(.CLK(CLK), .EN(RF_EN), .WRITE(WRITE),
-        .IDX(IDX+5), .DIN(DATA_IN_D), .DOUT(W_OUT[5]));
+        .IDX({2'b0,IDX}+5), .DIN(DATA_IN_D), .DOUT(W_OUT[5]));
 
     X_REG X_REG_E(.CLK(CLK), .EN(RF_EN), .WRITE(WRITE),
-        .IDX(IDX+6), .DIN(DATA_IN_E), .DOUT(W_OUT[6]));
+        .IDX({2'b0,IDX}+6), .DIN(DATA_IN_E), .DOUT(W_OUT[6]));
 
     X_REG X_REG_F(.CLK(CLK), .EN(RF_EN), .WRITE(WRITE),
-        .IDX(IDX+7), .DIN(DATA_IN_F), .DOUT(W_OUT[7]));
+        .IDX({2'b0,IDX}+7), .DIN(DATA_IN_F), .DOUT(W_OUT[7]));
 
     
 

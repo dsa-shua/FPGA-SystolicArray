@@ -8,7 +8,7 @@ module SystolicArray_tb();
     reg RF_EN = 0;
     reg WRITE = 0;
     
-    reg [4:0]   IDX = 0;
+    reg [2:0]   IDX = 0;
     
     reg [15:0]  DATA_0 = 0;
     reg [15:0]  DATA_1 = 0;
@@ -45,7 +45,7 @@ module SystolicArray_tb();
         // For every register
         
         for(integer i = 1; i < 9; i = i + 1) begin
-            IDX = i[4:0] - 1'b1;
+            IDX = i[2:0] - 1'b1;
             DATA_0 = i[15:0];
             DATA_1 = i[15:0];
             DATA_2 = i[15:0];

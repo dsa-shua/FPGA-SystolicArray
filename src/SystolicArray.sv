@@ -33,7 +33,7 @@ module SystolicArray(
     
     input WRITE;                    // WHEN LOAD IS LOW: When H, fill register file
     
-    input [4:0]     IDX;             
+    input [2:0]     IDX;             
 
     input [15:0]    DIN_0;
     input [15:0]    DIN_1;
@@ -59,7 +59,7 @@ module SystolicArray(
     // FOR REGISTER FILE // 
 
     reg [15:0] DATA_BUFFER [0:15];
-    reg [4:0]   IDX_BUFFER = 0;
+    reg [2:0]   IDX_BUFFER = 0;
     reg [3:0]   REG_SELECT_BUFFER = 0;
 
     initial begin
