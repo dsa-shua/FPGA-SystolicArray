@@ -28,7 +28,7 @@ module SystolicArray_tb();
     reg [15:0]  DATA_15 = 0;
 
     
-    reg [3:0]   REG_SELECT;
+
 
 
     initial begin
@@ -122,10 +122,8 @@ module SystolicArray_tb();
         .DIN_12(DATA_12), 
         .DIN_13(DATA_13), 
         .DIN_14(DATA_14), 
-        .DIN_15(DATA_15), 
+        .DIN_15(DATA_15)
         
-        
-        .REG_SELECT(REG_SELECT)
     );
 
 

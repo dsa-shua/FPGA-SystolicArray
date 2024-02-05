@@ -21,10 +21,8 @@ module SystolicArray(
     DIN_12,
     DIN_13,
     DIN_14,
-    DIN_15, 
+    DIN_15
     
-    
-    REG_SELECT
 );
 
     input CLK;
@@ -54,9 +52,6 @@ module SystolicArray(
     input [15:0]    DIN_14;
     input [15:0]    DIN_15;
 
-
-
-    input [3:0]     REG_SELECT;
 
     
 
@@ -104,7 +99,6 @@ module SystolicArray(
 
 
                 IDX_BUFFER <= IDX;
-                // REG_SELECT_BUFFER <= REG_SELECT;
             end
 
         end
