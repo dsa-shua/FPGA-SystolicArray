@@ -5,9 +5,13 @@ RUN_FILES = src/SystolicArray_tb.sv src/SystolicArray.sv src/tile.sv src/RF.sv s
 
 .PHONY: default clean pe systolic sim mux fifo test tile_sim tile hfifo RF x_reg run memory
 
-
 default:
-	verilator --timing --binary --trace top.sv systolic3x3.sv
+	verilator $(FLAGS) src/top_module_tb.sv src/top_module.sv src/SystolicArray.sv src/tile.sv src/RF.sv src/hPE.sv src/X_REG.sv
+
+
+
+# default:
+# 	verilator --timing --binary --trace top.sv systolic3x3.sv
 
 clean:
 	rm -rf $(DIR)
@@ -59,5 +63,3 @@ run:
 memory:
 	verilator $(FLAGS) src/memory_tb.sv src/memory.sv
 
-top:
-	verilator $(FLAGS) src/top_module_tb.sv src/top_module.sv src/SystolicArray.sv src/tile.sv src/RF.sv src/hPE.sv src/X_REG.sv
