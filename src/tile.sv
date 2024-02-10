@@ -91,7 +91,7 @@ module tile(
     hPE C03(.CLK(CLK),  .EN(EN), .C(Y_03), .A(N_R3X), .B(N_C02), .A_out(N_R03), .B_out(N_C03));
     hPE C13(.CLK(CLK),  .EN(EN), .C(Y_13), .A(N_R03), .B(N_C12), .A_out(N_R13), .B_out(N_C13));
     hPE C23(.CLK(CLK),  .EN(EN), .C(Y_23), .A(N_R13), .B(N_C22), .A_out(N_R23), .B_out(N_C23));
-    hPE C33(.CLK(CLK),  .EN(EN), .C(Y_33), .A(N_R32), .B(N_C32), .A_out(N_R33), .B_out(N_C33));
+    hPE C33(.CLK(CLK),  .EN(EN), .C(Y_33), .A(N_R23), .B(N_C32), .A_out(N_R33), .B_out(N_C33));
     hPE C43(.CLK(CLK),  .EN(EN), .C(Y_43), .A(N_R33), .B(N_C42), .A_out(N_R43), .B_out(N_C43));
     hPE C53(.CLK(CLK),  .EN(EN), .C(Y_53), .A(N_R43), .B(N_C52), .A_out(N_R53), .B_out(N_C53));
     hPE C63(.CLK(CLK),  .EN(EN), .C(Y_63), .A(N_R53), .B(N_C62), .A_out(N_R63), .B_out(N_C63));
