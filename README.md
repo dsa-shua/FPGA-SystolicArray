@@ -2,16 +2,53 @@
 
 <h3>[Project Currently Under Development]</h3>
 
+> Update
+
 <p>
-  Currently, the repository name is 3x3 [...] but this is really a bigger one at 8x8.
-  However, the implementation does not only end at an 8x8 since this will be "tiled" and be extended to a 32x32 systolic array. 
-  The implementation is from the bottom up hence I am starting with a small tile going up to a bigger tile.
-  Controller implementation would be done soon. 
-
-
-<br>
-
-  The firmware is planned to be written using Xilinx' Vitis program. This should interface the PS and the PL parts of the Xilinx PYNQ-Z2 board that I have. I can also extend this to connect my Raspberry Pi 4 
-  but that should be for the future. 
-  
+  Currently, the hardware is complete while the software (firmware) is on its early version. Current implementation
+  provides corret results for test matrix multiplications. 
+  <br>
+  For now, the firmware code includes only the backbone of the planned finished code. I have included an interrupt 
+  signal to be sent from the PL to PS after finishing matrix multiplication (23 clock cycles) and/or loading registers (8 clock cycles). 
 </p>
+
+
+<h5>
+  Data Sheets:
+</h5>
+
+> Block Diagram
+<p align="center">
+  <img src="systolic-array-hardware/block-diagram.png">
+</p>
+
+
+> Floor Planning
+<p align="center">
+  <img src="systolic-array-hardware/floorplanning.png">
+</p>
+
+
+> Power Summary
+
+<p align="center">
+  <img src="systolic-array-hardware/power-summary.png">
+</p>
+
+
+> Timing Summary
+
+<p align="center">
+  <img src="systolic-array-hardware/timing-summary.png">
+</p>
+
+
+> Utilization Summary
+
+<p align="center">
+  <img src="systolic-array-hardware/utilization-summary.png">
+</p>
+
+
+
+
