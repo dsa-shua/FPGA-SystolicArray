@@ -13,10 +13,22 @@
   had not yet included it on the firmware. I'll do it as soon as possible. :)
 </p>
 
+<br><br>
 
-<h5>
+---
+
+<h4>Source Files</h4>
+
+> [RTL Hardware Code](github.com/dsa-shua/32x32-SystolicArray/systolic-array-hardware)
+
+> [Software Code](github.com/dsa-shua/32x32-SystolicArray/systolic-array-software)
+
+---
+
+  
+<h4>
   Data Sheets:
-</h5>
+</h4>
 
 > Block Diagram
 <p align="center">
