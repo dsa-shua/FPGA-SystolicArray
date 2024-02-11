@@ -65,3 +65,14 @@
 
 
 
+---
+
+<h4>
+  FPGA Used: Xilinx PNYQ-Z2 FPGA 
+</h4>
+
+<p align="center">
+  <img src="/pynq-fpga.png">
+</p>
+
+[Coupang (쿠팡) Product Link](https://www.coupang.com/vp/products/6695901022?itemId=15490388486&vendorItemId=82709739509&q=zynq&itemsCount=36&searchId=17f7af577cbd49099de4d26aae7b8046&rank=0&isAddedCart=)
