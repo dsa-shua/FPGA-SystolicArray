@@ -19,9 +19,9 @@
 
 <h4>Source Files</h4>
 
-> [RTL Hardware Code](github.com/dsa-shua/32x32-SystolicArray/systolic-array-hardware)
+> [RTL Hardware Code](https://github.com/dsa-shua/32x32-SystolicArray/tree/main/systolic-array-hardware)
 
-> [Software Code](github.com/dsa-shua/32x32-SystolicArray/systolic-array-software)
+> [Software Code](https://github.com/dsa-shua/32x32-SystolicArray/tree/main/systolic-array-software)
 
 ---
 
