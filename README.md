@@ -9,7 +9,8 @@
   provides corret results for test matrix multiplications. 
   <br><br>
   For now, the firmware code includes only the backbone of the planned finished code. I have included an interrupt 
-  signal to be sent from the PL to PS after finishing matrix multiplication (23 clock cycles) and/or loading registers (8 clock cycles). 
+  signal to be sent from the PL to PS after finishing matrix multiplication (23 clock cycles) and/or loading registers (8 clock cycles) but
+  had not yet included it on the firmware. I'll do it as soon as possible. :)
 </p>
 
 
