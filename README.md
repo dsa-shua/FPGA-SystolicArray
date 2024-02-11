@@ -76,5 +76,8 @@
 </p>
 
 [Coupang (쿠팡) Product Link](https://www.coupang.com/vp/products/6695901022?itemId=15490388486&vendorItemId=82709739509&q=zynq&itemsCount=36&searchId=17f7af577cbd49099de4d26aae7b8046&rank=0&isAddedCart=)
+
 [Amazon Product Link](https://www.amazon.com/Sparkle-Exclusive-Cortex-A9-Protection-Accessories/dp/B0C9HBJ5JB/ref=sr_1_13?crid=2CPY2OYQHVPN4&keywords=xilinx&qid=1707630187&sprefix=xili%2Caps%2C273&sr=8-13)
+
 [Xilinx Website Link](https://www.xilinx.com/support/university/xup-boards/XUPPYNQ-Z2.html)
+
