@@ -1,6 +1,6 @@
-<h1>32x32 Systolic Array RTL + Firmware Project</h1>
+<h1>Systolic Array RTL + Firmware Project</h1>
 
-<h3>[Project Currently Under Development]</h3>
+<h3>[Project Currently Under Development: 8x8 Systolic Array]</h3>
 
 > Update
 
