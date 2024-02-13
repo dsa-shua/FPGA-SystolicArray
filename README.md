@@ -11,6 +11,9 @@
   For now, the firmware code includes only the backbone of the planned finished code. I have included an interrupt 
   signal to be sent from the PL to PS after finishing matrix multiplication (23 clock cycles) and/or loading registers (8 clock cycles) but
   had not yet included it on the firmware. I'll do it as soon as possible. :)
+  <br><br>
+  Note: Github Repo would not be updated for every edit on files but only for major updates only. 
+  Next update would be the completed version of the systolic array software and hardware.
 </p>
 
 <br><br>
