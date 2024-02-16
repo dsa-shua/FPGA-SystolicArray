@@ -35,34 +35,34 @@
 
 > Block Diagram
 <p align="center">
-  <img src="systolic-array-hardware/block-diagram.png">
+  <img src="img/block-diagram.png">
 </p>
 
 
 > Floor Planning
 <p align="center">
-  <img src="systolic-array-hardware/floorplanning.png">
+  <img src="img/floorplanning.png">
 </p>
 
 
 > Power Summary
 
 <p align="center">
-  <img src="systolic-array-hardware/power-summary.png">
+  <img src="img/power-summary.png">
 </p>
 
 
 > Timing Summary
 
 <p align="center">
-  <img src="systolic-array-hardware/timing-summary.png">
+  <img src="img/timing-summary.png">
 </p>
 
 
 > Utilization Summary
 
 <p align="center">
-  <img src="systolic-array-hardware/utilization-summary.png">
+  <img src="img/utilization-summary.png">
 </p>
 
 
@@ -75,7 +75,7 @@
 </h4>
 
 <p align="center">
-  <img src="/pynq-fpga.png">
+  <img src="img/pynq-fpga.png">
 </p>
 
 [Coupang (쿠팡) Product Link](https://www.coupang.com/vp/products/6695901022?itemId=15490388486&vendorItemId=82709739509&q=zynq&itemsCount=36&searchId=17f7af577cbd49099de4d26aae7b8046&rank=0&isAddedCart=)
