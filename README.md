@@ -20,8 +20,10 @@
 
 ---
 
-<h4>Performance Report</h4>
+<h4>Stats</h4>
 
+<ul>PS Clock Frequency: 650 MHz</ul>
+<ul>PL Clock Frequency: 100 MHz</ul>
 <ul>Matrix Multiplication: 1 us latency (8x8 matmul)</ul>
 <ul>Total (Write, Load, Matmul, Read): 0.042003 s</ul>
 
