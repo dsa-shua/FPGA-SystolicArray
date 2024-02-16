@@ -1,26 +1,36 @@
 <h1>Systolic Array RTL + Firmware Project</h1>
 
-<h3>[Project Currently Under Development: 8x8 Systolic Array]</h3>
+<h3>[First Release 8x8 Systolic Array]</h3>
 
 > Update
 
 <p>
-  Currently, the hardware is complete while the software (firmware) is on its early version. Current implementation
-  provides corret results for test matrix multiplications. 
+  Finally implemented the interrupt function after load and matmul is finished. I also made the main.c file a little bit cleaner
+  by using header files for interrupt and XGPIO initialization and the matrix references.
   <br><br>
-  For now, the firmware code includes only the backbone of the planned finished code. I have included an interrupt 
-  signal to be sent from the PL to PS after finishing matrix multiplication (23 clock cycles) and/or loading registers (8 clock cycles) but
-  had not yet included it on the firmware. I'll do it as soon as possible. :)
+  Next version would be adding new memory spaces for additional matrices in the PL fabric which would allow us to write
+  multiple matrices then switch to whatever matrix we want for matrix multiplication by specifying which matrices to load
+  to the registers.
   <br><br>
-  Note: Github Repo would not be updated for every edit on files but only for major updates only. 
-  Next update would be the completed version of the systolic array software and hardware.
+  I am also planning to add some features to specify if the matrix to be written on to the FPGA is a weight or input matrix
+  so we can "automatically" transpose the matrix. As of now, the matrix we have is transposed by default. 
 </p>
 
 <br><br>
 
 ---
 
+<h4>Performance Report</h4>
+
+<ul>Matrix Multiplication: 1 us latency (8x8 matmul)</ul>
+<ul>Total (Write, Load, Matmul, Read): 0.042003 s</ul>
+
+
+---
+
 <h4>Source Files</h4>
+
+
 
 > [RTL Hardware Code](https://github.com/dsa-shua/32x32-SystolicArray/tree/main/systolic-array-hardware)
 
